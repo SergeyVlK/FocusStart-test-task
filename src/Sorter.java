@@ -49,6 +49,18 @@ public class Sorter {
     }
 
     private void sortDesk() {
+        Integer[] arrayOfHeadFiles = new Integer[rfi.length];
+        for(int i = 0; i < arrayOfHeadFiles.length; i++) {
+            arrayOfHeadFiles[i] = (Integer) rfi[i].pop();
+        }
+        Integer index = indexOfMax(arrayOfHeadFiles);
+
+        while(index != null) {
+            wfi.write(arrayOfHeadFiles[index]);
+            arrayOfHeadFiles[index] = (Integer) rfi[index].pop();
+            index = indexOfMax(arrayOfHeadFiles);
+        }
+        wfi.close();
 
     }
 
@@ -72,5 +84,27 @@ public class Sorter {
        else {
            return null;
        }
+    }
+
+    private Integer indexOfMax(Integer[] mass) {
+
+        Integer index = 0;
+        for(int i = 1; i < mass.length; i++) {
+            if(mass[i] == null) {
+                continue;
+            }
+            else if(mass[index] == null)  {
+                index = i;
+            }
+            else if(mass[index] < mass[i]) {
+                index = i;
+            }
+        }
+        if(mass[index] != null) {
+            return index;
+        }
+        else {
+            return null;
+        }
     }
 }
