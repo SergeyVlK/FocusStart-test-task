@@ -5,7 +5,7 @@ public class Main {
         inFiles[1] = new String("file2.txt");
         inFiles[2] = new String("file3.txt");
 
-        new Sorter(true, false,"out.txt", inFiles ).sort();
+        new Sorter(false, true,"out.txt", inFiles ).sortString();
 
         //ReadFileInterface k =new IntegerFileReader("file1.txt");
         //System.out.println(k.top());

@@ -6,13 +6,13 @@ public class Sorter {
 
 
     public Sorter(boolean isIntegerType, boolean isAskMode, String outFile, String[] inFiles ) {
-        System.out.println(inFiles.length);
+
         if(isIntegerType) {
             rfi = new IntegerFileReader[inFiles.length];
             for(int i = 0; i < inFiles.length; i++) {
                 rfi[i] = new IntegerFileReader(inFiles[i]);
             }
-        wfi = new IntegerFileWriter(outFile);
+            wfi = new IntegerFileWriter(outFile);
         }
         else {
             rfi = new StringFileReader[inFiles.length];
@@ -31,6 +31,15 @@ public class Sorter {
         }
         else {
             this.sortDesk();
+        }
+    }
+
+    public void sortString() {
+        if (this.isAskMode) {
+            this.sortAskString();
+        }
+        else {
+            this.sortDeskString();
         }
     }
 
@@ -67,6 +76,8 @@ public class Sorter {
 
     }
 
+
+
     private Integer indexOfMin(Integer[] mass) {
 
        Integer index = 0;
@@ -99,6 +110,82 @@ public class Sorter {
                 index = i;
             }
             else if(mass[index] < mass[i]) {
+                index = i;
+            }
+        }
+        if(mass[index] != null) {
+            return index;
+        }
+        else {
+            return null;
+        }
+    }
+
+    private void sortAskString() {
+
+        String[] arrayOfHeadFiles = new String[rfi.length];
+        for(int i = 0; i < arrayOfHeadFiles.length; i++) {
+            arrayOfHeadFiles[i] = (String) rfi[i].pop();
+        }
+        Integer index = indexOfMin(arrayOfHeadFiles);
+
+        while(index != null) {
+            wfi.write(arrayOfHeadFiles[index]);
+            arrayOfHeadFiles[index] = (String) rfi[index].pop();
+            index = indexOfMin(arrayOfHeadFiles);
+        }
+        wfi.close();
+    }
+
+    private void sortDeskString() {
+
+        String[] arrayOfHeadFiles = new String[rfi.length];
+        for(int i = 0; i < arrayOfHeadFiles.length; i++) {
+            arrayOfHeadFiles[i] = (String) rfi[i].pop();
+        }
+        Integer index = indexOfMax(arrayOfHeadFiles);
+
+        while(index != null) {
+            wfi.write(arrayOfHeadFiles[index]);
+            arrayOfHeadFiles[index] = (String) rfi[index].pop();
+            index = indexOfMax(arrayOfHeadFiles);
+        }
+        wfi.close();
+
+    }
+
+    private Integer indexOfMin(String[] mass) {
+
+        Integer index = 0;
+        for(int i = 1; i < mass.length; i++) {
+            if(mass[i] == null) {
+                continue;
+            }
+            else if(mass[index] == null)  {
+                index = i;
+            }
+            else if(0 < mass[index].toLowerCase().replace(" ", "").compareTo(mass[i].toLowerCase().replace(" ", ""))) {
+                index = i;
+            }
+        }
+        if(mass[index] != null) {
+            return index;
+        }
+        else {
+            return null;
+        }
+    }
+
+    private Integer indexOfMax(String[] mass) {
+        Integer index = 0;
+        for(int i = 1; i < mass.length; i++) {
+            if(mass[i] == null) {
+                continue;
+            }
+            else if(mass[index] == null)  {
+                index = i;
+            }
+            else if(0 > mass[index].toLowerCase().replace(" ", "").compareTo(mass[i].toLowerCase().replace(" ", ""))) {
                 index = i;
             }
         }
