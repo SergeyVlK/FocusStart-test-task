@@ -31,6 +31,9 @@ public class StringFileReader implements ReadFileInterface<String> {
         if (currentString == null) {
             return true;
         }
+        if("".equals(this.currentString)) {
+            return isEOF();
+        }
         return false;
     }
 

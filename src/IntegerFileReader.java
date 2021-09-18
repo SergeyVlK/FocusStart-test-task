@@ -30,6 +30,9 @@ public class IntegerFileReader implements ReadFileInterface<Integer> {
         if (currentString == null) {
             return true;
         }
+        if("".equals(this.currentString)) {
+            return isEOF();
+        }
         return false;
     }
 

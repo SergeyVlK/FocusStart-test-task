@@ -6,6 +6,7 @@ public class Sorter {
 
 
     public Sorter(boolean isIntegerType, boolean isAskMode, String outFile, String[] inFiles ) {
+        System.out.println(inFiles.length);
         if(isIntegerType) {
             rfi = new IntegerFileReader[inFiles.length];
             for(int i = 0; i < inFiles.length; i++) {
@@ -34,6 +35,7 @@ public class Sorter {
     }
 
     private void sortAsk() {
+
         Integer[] arrayOfHeadFiles = new Integer[rfi.length];
         for(int i = 0; i < arrayOfHeadFiles.length; i++) {
             arrayOfHeadFiles[i] = (Integer) rfi[i].pop();
@@ -49,6 +51,7 @@ public class Sorter {
     }
 
     private void sortDesk() {
+
         Integer[] arrayOfHeadFiles = new Integer[rfi.length];
         for(int i = 0; i < arrayOfHeadFiles.length; i++) {
             arrayOfHeadFiles[i] = (Integer) rfi[i].pop();
@@ -87,7 +90,6 @@ public class Sorter {
     }
 
     private Integer indexOfMax(Integer[] mass) {
-
         Integer index = 0;
         for(int i = 1; i < mass.length; i++) {
             if(mass[i] == null) {
