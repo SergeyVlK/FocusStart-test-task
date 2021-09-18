@@ -1,3 +1,0 @@
-string 1
-str 2
-String string  3
