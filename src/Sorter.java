@@ -57,6 +57,7 @@ public class Sorter {
             index = indexOfMin(arrayOfHeadFiles);
         }
         wfi.close();
+
     }
 
     private void sortDesk() {

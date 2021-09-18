@@ -1,15 +1,41 @@
 public class Main {
     public static void main(String[] args) {
-        String[] inFiles = new String[3];
-        inFiles[0] = new String("file1.txt");
-        inFiles[1] = new String("file2.txt");
-        inFiles[2] = new String("file3.txt");
+        boolean isIntegerType = true;
+        boolean isAskMode = true;
+        int argsLen = args.length;
+        int countParams = 0;
+        for(int i = 0 ; i < 2 ; i++) {
+            if("-i".equals(args[i])) {
+                isIntegerType = true;
+                countParams++;
+            }
+            if("-s".equals(args[i])) {
+                isIntegerType = false;
+                countParams++;
+            }
+            if("-a".equals(args[i])) {
+                isAskMode = true;
+                countParams++;
+            }
+            if("-d".equals(args[i])) {
+                isAskMode = false;
+                countParams++;
+            }
+        }
 
-        new Sorter(false, true,"out.txt", inFiles ).sortString();
+        String outFile = args[countParams];
+        String[] inFiles = new String[argsLen - countParams - 1];
+        for(int i = 0; i < argsLen - countParams - 1; i++) {
+            inFiles[i] = args[i + countParams + 1];
+        }
 
-        //ReadFileInterface k =new IntegerFileReader("file1.txt");
-        //System.out.println(k.top());
-
+        Sorter sorter = new Sorter(isIntegerType, isAskMode,outFile, inFiles);
+        if(isIntegerType) {
+            sorter.sort();
+        }
+        else {
+            sorter.sortString();
+        }
 
 
 
