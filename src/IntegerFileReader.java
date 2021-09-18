@@ -41,8 +41,5 @@ public class IntegerFileReader implements ReadFileInterface<Integer> {
         return Integer.valueOf(this.currentString);
     }
 
-    @Override
-    public Integer top() {
-        return (currentString!=null)? Integer.valueOf(this.currentString) : null ;
-    }
+
 }

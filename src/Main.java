@@ -4,10 +4,10 @@ public class Main {
         inFiles[0] = new String("file1.txt");
         inFiles[1] = new String("file2.txt");
 
-        //new Sorter(true, true,"out.txt", inFiles ).sort();
+        new Sorter(true, true,"out.txt", inFiles ).sort();
 
-        ReadFileInterface k =new IntegerFileReader("file1.txt");
-        System.out.println(k.pop());
+        //ReadFileInterface k =new IntegerFileReader("file1.txt");
+        //System.out.println(k.top());
 
 
 

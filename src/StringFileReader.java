@@ -42,9 +42,5 @@ public class StringFileReader implements ReadFileInterface<String> {
         return this.currentString;
     }
 
-    @Override
-    public String top() {
-        return this.currentString;
-    }
 
 }

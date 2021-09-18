@@ -34,11 +34,16 @@ public class Sorter {
     }
 
     private void sortAsk() {
-        Integer index = indexOfMin(rfi);
+        Integer[] arrayOfHeadFiles = new Integer[rfi.length];
+        for(int i = 0; i < arrayOfHeadFiles.length; i++) {
+            arrayOfHeadFiles[i] = (Integer) rfi[i].pop();
+        }
+        Integer index = indexOfMin(arrayOfHeadFiles);
 
         while(index != null) {
-            wfi.write(rfi[index.intValue()].pop().toString());
-            index = indexOfMin(rfi);
+            wfi.write(arrayOfHeadFiles[index]);
+            arrayOfHeadFiles[index] = (Integer) rfi[index].pop();
+            index = indexOfMin(arrayOfHeadFiles);
         }
         wfi.close();
     }
@@ -47,24 +52,21 @@ public class Sorter {
 
     }
 
-    private Integer indexOfMin(ReadFileInterface<Integer>[] rfi) {
-       Integer result = rfi[0].top();
+    private Integer indexOfMin(Integer[] mass) {
 
        Integer index = 0;
-       for(int i = 1; i < rfi.length; i++) {
-           if(rfi[i].top() == null) {
+       for(int i = 1; i < mass.length; i++) {
+           if(mass[i] == null) {
                continue;
            }
-           else if(result == null) {
-               result = rfi[i].top();
+           else if(mass[index] == null)  {
                index = i;
            }
-           else if(result > rfi[i].top()) {
-               result = rfi[i].top();
+           else if(mass[index] > mass[i]) {
                index = i;
            }
        }
-       if(result != null) {
+       if(mass[index] != null) {
            return index;
        }
        else {
